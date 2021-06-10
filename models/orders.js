@@ -49,6 +49,14 @@ const ordersSchema = mongoose.Schema({
   }
 });
 
+ordersSchema.virtual('id').get(function() {
+  return this._id.toHexString();
+});
+
+ordersSchema.set('toJSON', {
+  virtuals: true
+});
+
 exports.Order = mongoose.model('Order', ordersSchema);
 
 /**
