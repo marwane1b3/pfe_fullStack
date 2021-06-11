@@ -18,7 +18,7 @@ connectDB();
 app.use(morgan(''));
 app.use(express.json());
 app.use('/public/uploads/', express.static(__dirname + '/public/uploads/'));
-//app.use(Protect());
+app.use(Protect());
 app.use(errorHandler);
 
 // routes

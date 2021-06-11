@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 });
-router.get('/products/:id', async (req, res) => {
+router.get('/products', async (req, res) => {
   try {
     await Category.aggregate([
       {
@@ -58,27 +58,6 @@ router.get('/products/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // const productIds = Promise.all(
-  //     req.body.products.map(async item => {
-  //       let newProduct = new Product({
-  //         name: item.name,
-  //     description: item.description,
-  //     richDescription: item.richDescription,
-  //     image: item.image,
-  //     brand: item.brand,
-  //     price: item.price,
-  //     category: item.category,
-  //     countInStock: item.countInStock,
-  //     rating: item.rating,
-  //     numReviews: item.numReviews,
-  //     isFeatured: item.isFeatured
-  //       });
-  //       newProduct = await newProduct.save();
-  //       return newProduct._id;
-  //     })
-  //   );
-  //   const resolvedProducts = await productIds;
-
   let category = new Category({
     name: req.body.name,
     icon: req.body.icon,
