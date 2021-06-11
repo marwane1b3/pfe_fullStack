@@ -47,6 +47,10 @@ const productSchema = mongoose.Schema({
   dateCreated: {
     type: Date,
     default: Date.now
+  },
+  discount: {
+    type: Number,
+    default: 0
   }
 });
 productSchema.virtual('id').get(function() {
@@ -56,4 +60,4 @@ productSchema.virtual('id').get(function() {
 productSchema.set('toJSON', {
   virtuals: true
 });
-exports.Product = mongoose.model('Product', productSchema);
+exports.Product = mongoose.model('Product', productSchema, 'product');

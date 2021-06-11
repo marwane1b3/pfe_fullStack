@@ -104,7 +104,8 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
       countInStock: req.body.countInStock,
       rating: req.body.rating,
       numReviews: req.body.numReviews,
-      isFeatured: req.body.isFeatured
+      isFeatured: req.body.isFeatured,
+      discount: req.body.discount
     });
 
     product = await product.save();
@@ -160,7 +161,8 @@ router.put('/:id', uploadOptions.single('image'), async (req, res) => {
         countInStock: req.body.countInStock,
         rating: req.body.rating,
         numReviews: req.body.numReviews,
-        isFeatured: req.body.isFeatured
+        isFeatured: req.body.isFeatured,
+        discount: req.body.discount
       },
       { new: true, useFindAndModify: false }
     );

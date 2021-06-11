@@ -9,6 +9,13 @@ const categorySchema = mongoose.Schema({
     type: String
   },
   color: { type: String }
+  //   category: [
+  //     {
+  //       type: mongoose.Schema.Types.ObjectId,
+  //       ref: 'Product',
+  //       required: true
+  //     }
+  //   ]
 });
 categorySchema.virtual('id').get(function() {
   return this._id.toHexString();
