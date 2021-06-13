@@ -27,7 +27,7 @@ router.get('/:id', async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 });
-router.get('/products', async (req, res) => {
+router.get('/products/getData', async (req, res) => {
   try {
     await Category.aggregate([
       {
@@ -41,6 +41,7 @@ router.get('/products', async (req, res) => {
       },
       {
         $project: {
+          id: 1,
           name: 1,
           products: '$products',
           totalProducts: { $size: '$products' }
