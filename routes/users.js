@@ -100,14 +100,17 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const logUser = await User.findOne({ email: req.body.email });
+    let userDetails;
     if (
       logUser &&
       bcrypt.compareSync(req.body.password, logUser.passwordHash)
     ) {
+      userDetails = await User.findById(logUser.id).select('-passwordHash');
       res.status(200).json({
         success: true,
         message: 'user authenticated',
-        token: generateToken(logUser)
+        token: generateToken(logUser),
+        userDetails: userDetails
       });
     } else {
       throw new Error('wrong email or password .');
