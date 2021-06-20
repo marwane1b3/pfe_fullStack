@@ -7,8 +7,12 @@ function Protect() {
     isRevoked: isRevoked
   }).unless({
     path: [
+      { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },
       { url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },
       { url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS'] },
+      { url: /\/api\/v1\/users(.*)/, methods: ['PUT', 'OPTIONS'] },
+      { url: /\/api\/v1\/orders(.*)/, methods: ['GET', 'OPTIONS', 'POST'] },
+
       '/api/v1/users/login',
       '/api/v1/users/register'
     ]
@@ -16,10 +20,10 @@ function Protect() {
 }
 async function isRevoked(req, payload, done) {
   if (!payload.isAdmin) {
-    return done(null, true);
-  } else {
-    done();
+    done(null, true);
   }
+
+  done();
 }
 module.exports = Protect;
 // const jwt = require('jsonwebtoken');
