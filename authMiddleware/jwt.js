@@ -26,6 +26,7 @@ async function isRevoked(req, payload, done) {
   done();
 }
 module.exports = Protect;
+
 // const jwt = require('jsonwebtoken');
 // const { User } = require('../models/User');
 

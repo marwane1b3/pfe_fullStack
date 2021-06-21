@@ -225,9 +225,11 @@ router.get('/get/featured/:count?', async (req, res) => {
     const count = req.params.count ? req.params.count : 0;
     let fproducts;
     if (count > 0) {
-      fproducts = await Product.find({ isFeatured: true }).limit(+count);
+      fproducts = await Product.find({ isFeatured: true })
+        .limit(+count)
+        .populate('category');
     } else {
-      fproducts = await Product.find({ isFeatured: true });
+      fproducts = await Product.find({ isFeatured: true }).populate('category');
     }
     if (fproducts) {
       res.status(200).json({ success: true, payload: fproducts });
