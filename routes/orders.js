@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
     );
     const totalPrice = totalPrices.reduce((a, b) => a + b, 0);
     //3 lid user if exists :
-    const userId = await User.findById(req.params.user);
+    const userId = await User.findById(req.body.user);
     if (!userId) throw new Error('no user found');
     //3 ajouter le tout
     let order = new Order({
