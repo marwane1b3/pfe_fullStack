@@ -12,6 +12,7 @@ const api = process.env.API_URI;
 const { connectDB } = require('./config');
 const Protect = require('./authMiddleware/jwt');
 const { errorHandler } = require('./authMiddleware/errorHandler');
+var cors = require('cors');
 connectDB();
 //middlewares
 
@@ -20,14 +21,7 @@ app.use(express.json());
 app.use('/public/uploads/', express.static(__dirname + '/public/uploads/'));
 app.use(Protect());
 app.use(errorHandler);
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-
+app.use(cors());
 
 // routes
 app.use(`${api}/products`, productRouter);
